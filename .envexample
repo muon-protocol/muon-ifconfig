@@ -1,0 +1,4 @@
+BUILD_MODE=production
+#development/production
+
+PORT=3002
