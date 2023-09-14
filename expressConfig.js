@@ -5,7 +5,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.listen(port, () => {
+app.listen({
+    port,
+    host: '0.0.0.0',
+}, () => {
     console.log(`ifconfig app listening on port ${port}`)
 });
 
@@ -14,12 +17,4 @@ app.get('/', async (req, res) => {
     if (ip.includes(','))
         ip = ip.substring(0, ip.indexOf(','));
     res.send({success: true, ip_addr: ip});
-});
-
-
-app.get('/test', async (req, res) => {
-    res.send({
-        'x-forwarded-for': req.headers['x-forwarded-for'],
-        'req.socket.remoteAddress': req.socket.remoteAddress
-    });
 });
