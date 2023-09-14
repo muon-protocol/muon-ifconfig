@@ -17,3 +17,9 @@ app.get('/', async (req, res) => {
 });
 
 
+app.get('/test', async (req, res) => {
+    res.send({
+        'x-forwarded-for': req.headers['x-forwarded-for'],
+        'req.socket.remoteAddress': req.socket.remoteAddress
+    });
+});
