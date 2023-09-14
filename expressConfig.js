@@ -1,4 +1,5 @@
 import express from 'express'
+import ipaddr from 'ipaddr.js'
 import * as dotenv from 'dotenv'
 
 dotenv.config();
@@ -16,5 +17,7 @@ app.get('/', async (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     if (ip.includes(','))
         ip = ip.substring(0, ip.indexOf(','));
+
+    ip = ipaddr.process(ip).toString();
     res.send({success: true, ip_addr: ip});
 });
