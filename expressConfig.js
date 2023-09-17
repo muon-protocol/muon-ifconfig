@@ -14,7 +14,7 @@ app.listen({
 });
 
 app.get('/', async (req, res) => {
-    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress.split(":").slice(-1).pop();
     if (ip.includes(','))
         ip = ip.substring(0, ip.indexOf(','));
 
